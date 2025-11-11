@@ -10,7 +10,7 @@ const SHAPE_CONFIGS = [
     rotationMax: 8,
     bodySkewMax: 6,
     layout: {
-      translateX: -110,
+      translateX: -75,
       translateY: 0,
       scale: 0.92,
       zIndex: 1,
@@ -27,7 +27,7 @@ const SHAPE_CONFIGS = [
     rotationMax: 7,
     bodySkewMax: 5,
     layout: {
-      translateX: -70,
+      translateX: -40,
       translateY: 0,
       scale: 0.95,
       zIndex: 4,
@@ -44,7 +44,7 @@ const SHAPE_CONFIGS = [
     rotationMax: 8,
     bodySkewMax: 6,
     layout: {
-      translateX: -30,
+      translateX: -5,
       translateY: 0,
       scale: 0.93,
       zIndex: 2,
@@ -61,7 +61,7 @@ const SHAPE_CONFIGS = [
     rotationMax: 6,
     bodySkewMax: 4,
     layout: {
-      translateX: 10,
+      translateX: 30,
       translateY: 0,
       scale: 0.97,
       zIndex: 3,
@@ -181,7 +181,10 @@ const Login = () => {
   return (
     <>
       <section className="flex min-h-[calc(100vh-8rem)] w-full flex-1 flex-col justify-center bg-slate-100/70 px-0 py-16">
-        <div className="mx-auto flex w-full max-w-7xl flex-col overflow-hidden rounded-3xl bg-white/60 shadow-lg backdrop-blur md:flex-row">
+        <div
+          className="mx-auto flex w-full flex-col overflow-hidden rounded-3xl bg-white/60 shadow-lg backdrop-blur md:flex-row"
+          style={{ maxWidth: "90rem" }}
+        >
           <div
             className="flex w-full flex-1 items-center justify-center bg-white/10 p-8 text-center md:p-12 overflow-visible"
             style={{ minWidth: "0" }}
@@ -343,7 +346,7 @@ const Login = () => {
             display: flex;
             align-items: flex-end;
             justify-content: center;
-            margin-right: -40px;
+            margin-right: -60px;
             transform: translate(
                 var(--layout-translate-x, 0px),
                 var(--layout-translate-y, 0px)
@@ -420,18 +423,18 @@ const Login = () => {
               radial-gradient(circle, var(--face-color) 50%, transparent 51%),
               radial-gradient(circle, var(--face-color) 50%, transparent 51%),
               linear-gradient(
-                to bottom,
-                transparent 46%,
-                rgba(var(--eyelid-color-rgb), var(--eye-lid-opacity, 0)) 46%,
-                rgba(var(--eyelid-color-rgb), var(--eye-lid-opacity, 0)) 54%,
-                transparent 54%
+                to right,
+                transparent 0%,
+                rgba(var(--eyelid-color-rgb), var(--eye-lid-opacity, 0)) 10%,
+                rgba(var(--eyelid-color-rgb), var(--eye-lid-opacity, 0)) 90%,
+                transparent 100%
               ),
               linear-gradient(
-                to bottom,
-                transparent 46%,
-                rgba(var(--eyelid-color-rgb), var(--eye-lid-opacity, 0)) 46%,
-                rgba(var(--eyelid-color-rgb), var(--eye-lid-opacity, 0)) 54%,
-                transparent 54%
+                to right,
+                transparent 0%,
+                rgba(var(--eyelid-color-rgb), var(--eye-lid-opacity, 0)) 10%,
+                rgba(var(--eyelid-color-rgb), var(--eye-lid-opacity, 0)) 90%,
+                transparent 100%
               );
             background-repeat: no-repeat;
             background-size:
@@ -443,8 +446,8 @@ const Login = () => {
               35px 18px,
               50px 50px,
               50px 50px,
-              16px 4px,
-              16px 4px;
+              14px 3px,
+              14px 3px;
             background-position:
               calc(18px + var(--eye-offset-x, 0px)) calc(7px + var(--eye-offset-y, 0px)),
               calc(39px + var(--eye-offset-x, 0px)) calc(7px + var(--eye-offset-y, 0px)),
@@ -454,8 +457,8 @@ const Login = () => {
               50% 35px,
               50% 16px,
               50% 32px,
-              calc(18px + var(--eye-offset-x, 0px)) 13px,
-              calc(39px + var(--eye-offset-x, 0px)) 13px;
+              calc(17px + var(--eye-offset-x, 0px)) calc(8px + var(--eye-offset-y, 0px)),
+              calc(38px + var(--eye-offset-x, 0px)) calc(8px + var(--eye-offset-y, 0px));
             transition:
               transform 0.2s ease-out,
               background-position 0.15s ease-out,
