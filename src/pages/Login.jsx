@@ -4,6 +4,7 @@ const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [faceOffset, setFaceOffset] = useState({ x: 0, y: 0, rotate: 0 });
   const [eyeOffset, setEyeOffset] = useState({ x: 0, y: 0 });
+  const [bodySkew, setBodySkew] = useState(0);
   const loaderRef = useRef(null);
 
   const handleChange = (event) => {
@@ -28,6 +29,7 @@ const Login = () => {
       const faceMax = 18;
       const eyeMax = 5;
       const rotationMax = 8;
+      const bodySkewMax = 6;
 
       const normalizedX = Math.max(Math.min(deltaX / 150, 1), -1);
       const normalizedY = Math.max(Math.min(deltaY / 150, 1), -1);
@@ -37,9 +39,11 @@ const Login = () => {
       const eyesX = eyeMax * normalizedX;
       const eyesY = eyeMax * normalizedY;
       const rotate = rotationMax * normalizedX;
+      const bodySkewValue = bodySkewMax * normalizedX * -1;
 
       setFaceOffset({ x: faceX, y: faceY, rotate });
       setEyeOffset({ x: eyesX, y: eyesY });
+      setBodySkew(bodySkewValue);
     };
 
     window.addEventListener("mousemove", handleMouseMove);
@@ -69,6 +73,7 @@ const Login = () => {
                   "--face-rotate": `${faceOffset.rotate}deg`,
                   "--eye-offset-x": `${eyeOffset.x}px`,
                   "--eye-offset-y": `${eyeOffset.y}px`,
+                  "--body-skew": `${bodySkew}deg`,
                 }}
               />
             </div>
@@ -154,6 +159,9 @@ const Login = () => {
             border-radius: 100px 100px 0 0;
             box-shadow: 0 20px 45px -20px rgba(15, 23, 42, 0.35);
             overflow: hidden;
+            transform-origin: 50% 100%;
+            transform: skewX(var(--body-skew, 0deg));
+            transition: transform 0.2s ease-out;
           }
 
           .login-loader:after {
