@@ -10,7 +10,7 @@ const SHAPE_CONFIGS = [
     rotationMax: 8,
     bodySkewMax: 6,
     layout: {
-      translateX: -75,
+      translateX: -50,
       translateY: 0,
       scale: 0.92,
       zIndex: 1,
@@ -27,7 +27,7 @@ const SHAPE_CONFIGS = [
     rotationMax: 7,
     bodySkewMax: 5,
     layout: {
-      translateX: -40,
+      translateX: -20,
       translateY: 0,
       scale: 0.95,
       zIndex: 4,
@@ -44,7 +44,7 @@ const SHAPE_CONFIGS = [
     rotationMax: 8,
     bodySkewMax: 6,
     layout: {
-      translateX: -5,
+      translateX: 10,
       translateY: 0,
       scale: 0.93,
       zIndex: 2,
@@ -61,7 +61,7 @@ const SHAPE_CONFIGS = [
     rotationMax: 6,
     bodySkewMax: 4,
     layout: {
-      translateX: 30,
+      translateX: 40,
       translateY: 0,
       scale: 0.97,
       zIndex: 3,
@@ -332,13 +332,13 @@ const Login = () => {
             width: 100%;
             max-width: clamp(600px, 70vw, 900px);
             align-items: flex-end;
-            justify-content: flex-start;
+            justify-content: center;
             padding: clamp(20px, 3.5vw, 34px) 0;
             gap: 0;
             border-radius: clamp(120px, 20vw, 260px);
             background: transparent;
             box-shadow: none;
-            margin-left: clamp(0px, 2vw, 40px);
+            margin: 0 auto;
           }
 
           .login-loader-stack__item {
