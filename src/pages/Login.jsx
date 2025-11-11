@@ -11,7 +11,7 @@ const SHAPE_CONFIGS = [
     bodySkewMax: 6,
     layout: {
       translateX: -110,
-      translateY: 28,
+      translateY: 0,
       scale: 0.92,
       zIndex: 1,
       opacity: 1,
@@ -28,7 +28,7 @@ const SHAPE_CONFIGS = [
     bodySkewMax: 5,
     layout: {
       translateX: -70,
-      translateY: 22,
+      translateY: 0,
       scale: 0.95,
       zIndex: 4,
       opacity: 1,
@@ -45,7 +45,7 @@ const SHAPE_CONFIGS = [
     bodySkewMax: 6,
     layout: {
       translateX: -30,
-      translateY: -2,
+      translateY: 0,
       scale: 0.93,
       zIndex: 2,
       opacity: 1,
@@ -62,7 +62,7 @@ const SHAPE_CONFIGS = [
     bodySkewMax: 4,
     layout: {
       translateX: 10,
-      translateY: 2,
+      translateY: 0,
       scale: 0.97,
       zIndex: 3,
       opacity: 1,
@@ -343,7 +343,7 @@ const Login = () => {
             display: flex;
             align-items: flex-end;
             justify-content: center;
-            margin-right: -55px;
+            margin-right: -40px;
             transform: translate(
                 var(--layout-translate-x, 0px),
                 var(--layout-translate-y, 0px)
@@ -377,7 +377,7 @@ const Login = () => {
           }
 
           .login-loader {
-            --loader-width: clamp(110px, 10vw, 150px);
+            --loader-width: clamp(85px, 8vw, 115px);
             --loader-height: clamp(130px, 14vw, 200px);
             --shell-color: #fff;
             --shell-shadow: none;
@@ -482,8 +482,8 @@ const Login = () => {
           }
 
           .login-loader--primary {
-            --loader-width: clamp(110px, 10vw, 150px);
-            --loader-height: clamp(130px, 14vw, 200px);
+            --loader-width: clamp(85px, 8vw, 115px);
+            --loader-height: clamp(160px, 18vw, 240px);
             --shell-color: #fff;
             --shell-shadow: 0 20px 45px -20px rgba(15, 23, 42, 0.35);
             --face-color: #cfecf9;
@@ -496,8 +496,8 @@ const Login = () => {
           }
 
           .login-loader--secondary {
-            --loader-width: clamp(100px, 12vw, 180px);
-            --loader-height: clamp(100px, 11vw, 155px);
+            --loader-width: clamp(75px, 9vw, 135px);
+            --loader-height: clamp(80px, 9vw, 120px);
             --shell-color: #fff7ed;
             --shell-shadow: 0 18px 40px -22px rgba(217, 119, 6, 0.25);
             --face-color: #fed7aa;
@@ -510,8 +510,8 @@ const Login = () => {
           }
 
           .login-loader--tertiary {
-            --loader-width: clamp(120px, 13vw, 190px);
-            --loader-height: clamp(120px, 13vw, 190px);
+            --loader-width: clamp(90px, 10vw, 145px);
+            --loader-height: clamp(110px, 12vw, 160px);
             --shell-color: #eff6ff;
             --shell-shadow: 0 18px 40px -22px rgba(37, 99, 235, 0.28);
             --face-color: #bfdbfe;
@@ -524,8 +524,8 @@ const Login = () => {
           }
 
           .login-loader--quaternary {
-            --loader-width: clamp(95px, 11vw, 165px);
-            --loader-height: clamp(145px, 16vw, 225px);
+            --loader-width: clamp(70px, 8vw, 125px);
+            --loader-height: clamp(140px, 15vw, 200px);
             --shell-color: #f5f3ff;
             --shell-shadow: 0 18px 40px -22px rgba(109, 40, 217, 0.25);
             --face-color: #ddd6fe;
