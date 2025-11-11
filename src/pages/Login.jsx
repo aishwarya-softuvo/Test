@@ -13,7 +13,7 @@ const SHAPE_CONFIGS = [
       translateX: -110,
       translateY: 28,
       scale: 0.92,
-      zIndex: 2,
+      zIndex: 1,
       opacity: 1,
       filter: "none",
     },
@@ -27,10 +27,10 @@ const SHAPE_CONFIGS = [
     rotationMax: 7,
     bodySkewMax: 5,
     layout: {
-      translateX: -50,
+      translateX: -70,
       translateY: 22,
-      scale: 0.93,
-      zIndex: 1,
+      scale: 0.95,
+      zIndex: 4,
       opacity: 1,
       filter: "none",
     },
@@ -44,10 +44,10 @@ const SHAPE_CONFIGS = [
     rotationMax: 8,
     bodySkewMax: 6,
     layout: {
-      translateX: -8,
+      translateX: -30,
       translateY: -2,
-      scale: 1.04,
-      zIndex: 4,
+      scale: 0.93,
+      zIndex: 2,
       opacity: 1,
       filter: "none",
     },
@@ -61,9 +61,9 @@ const SHAPE_CONFIGS = [
     rotationMax: 6,
     bodySkewMax: 4,
     layout: {
-      translateX: 25,
+      translateX: 10,
       translateY: 2,
-      scale: 0.96,
+      scale: 0.97,
       zIndex: 3,
       opacity: 1,
       filter: "none",
@@ -330,7 +330,7 @@ const Login = () => {
             max-width: clamp(600px, 70vw, 900px);
             align-items: flex-end;
             justify-content: flex-start;
-            padding: clamp(20px, 3.5vw, 34px);
+            padding: clamp(20px, 3.5vw, 34px) 0;
             gap: 0;
             border-radius: clamp(120px, 20vw, 260px);
             background: transparent;
@@ -343,6 +343,7 @@ const Login = () => {
             display: flex;
             align-items: flex-end;
             justify-content: center;
+            margin-right: -55px;
             transform: translate(
                 var(--layout-translate-x, 0px),
                 var(--layout-translate-y, 0px)
@@ -355,6 +356,10 @@ const Login = () => {
               filter 0.35s ease,
               opacity 0.35s ease;
             z-index: var(--layout-z, 1);
+          }
+
+          .login-loader-stack__item:last-child {
+            margin-right: 0;
           }
 
           @media (max-width: 768px) {
@@ -372,8 +377,8 @@ const Login = () => {
           }
 
           .login-loader {
-            --loader-width: clamp(160px, 15vw, 220px);
-            --loader-height: clamp(185px, 20vw, 280px);
+            --loader-width: clamp(110px, 10vw, 150px);
+            --loader-height: clamp(130px, 14vw, 200px);
             --shell-color: #fff;
             --shell-shadow: none;
             --face-color: #cfecf9;
@@ -398,8 +403,8 @@ const Login = () => {
           .login-loader:after {
             content: "";
             position: absolute;
-            width: 100px;
-            height: 125px;
+            width: 70px;
+            height: 88px;
             left: 50%;
             top: 25px;
             transform: translate(calc(-50% + var(--face-offset-x, 0px)), var(--face-offset-y, 0px))
@@ -430,27 +435,27 @@ const Login = () => {
               );
             background-repeat: no-repeat;
             background-size:
-              16px 16px,
-              16px 16px,
-              10px 10px,
-              42px 42px,
-              12px 3px,
-              50px 25px,
-              70px 70px,
-              70px 70px,
-              22px 6px,
-              22px 6px;
+              12px 12px,
+              12px 12px,
+              8px 8px,
+              30px 30px,
+              9px 2px,
+              35px 18px,
+              50px 50px,
+              50px 50px,
+              16px 4px,
+              16px 4px;
             background-position:
-              calc(25px + var(--eye-offset-x, 0px)) calc(10px + var(--eye-offset-y, 0px)),
-              calc(55px + var(--eye-offset-x, 0px)) calc(10px + var(--eye-offset-y, 0px)),
-              36px 44px,
-              50% 30px,
-              50% 85px,
-              50% 50px,
-              50% 22px,
-              50% 45px,
-              calc(25px + var(--eye-offset-x, 0px)) 18px,
-              calc(55px + var(--eye-offset-x, 0px)) 18px;
+              calc(18px + var(--eye-offset-x, 0px)) calc(7px + var(--eye-offset-y, 0px)),
+              calc(39px + var(--eye-offset-x, 0px)) calc(7px + var(--eye-offset-y, 0px)),
+              25px 31px,
+              50% 21px,
+              50% 60px,
+              50% 35px,
+              50% 16px,
+              50% 32px,
+              calc(18px + var(--eye-offset-x, 0px)) 13px,
+              calc(39px + var(--eye-offset-x, 0px)) 13px;
             transition:
               transform 0.2s ease-out,
               background-position 0.15s ease-out,
@@ -461,7 +466,7 @@ const Login = () => {
             content: "";
             position: absolute;
             width: 140%;
-            height: 125px;
+            height: 88px;
             left: -20%;
             top: 0;
             transform: translate(calc(var(--face-offset-x, 0px) * 0.4), calc(var(--face-offset-y, 0px) * 0.4))
@@ -471,14 +476,14 @@ const Login = () => {
               radial-gradient(circle, var(--ear-color) 48%, transparent 50%),
               radial-gradient(circle, var(--ear-color) 48%, transparent 50%);
             background-repeat: no-repeat;
-            background-size: 65px 65px;
-            background-position: 0px 12px, 145px 12px;
+            background-size: 46px 46px;
+            background-position: 0px 8px, 102px 8px;
             transition: transform 0.2s ease-out;
           }
 
           .login-loader--primary {
-            --loader-width: clamp(160px, 15vw, 220px);
-            --loader-height: clamp(185px, 20vw, 280px);
+            --loader-width: clamp(110px, 10vw, 150px);
+            --loader-height: clamp(130px, 14vw, 200px);
             --shell-color: #fff;
             --shell-shadow: 0 20px 45px -20px rgba(15, 23, 42, 0.35);
             --face-color: #cfecf9;
@@ -491,8 +496,8 @@ const Login = () => {
           }
 
           .login-loader--secondary {
-            --loader-width: clamp(150px, 18vw, 260px);
-            --loader-height: clamp(140px, 16vw, 220px);
+            --loader-width: clamp(100px, 12vw, 180px);
+            --loader-height: clamp(100px, 11vw, 155px);
             --shell-color: #fff7ed;
             --shell-shadow: 0 18px 40px -22px rgba(217, 119, 6, 0.25);
             --face-color: #fed7aa;
@@ -505,8 +510,8 @@ const Login = () => {
           }
 
           .login-loader--tertiary {
-            --loader-width: clamp(180px, 19vw, 280px);
-            --loader-height: clamp(180px, 19vw, 280px);
+            --loader-width: clamp(120px, 13vw, 190px);
+            --loader-height: clamp(120px, 13vw, 190px);
             --shell-color: #eff6ff;
             --shell-shadow: 0 18px 40px -22px rgba(37, 99, 235, 0.28);
             --face-color: #bfdbfe;
@@ -519,8 +524,8 @@ const Login = () => {
           }
 
           .login-loader--quaternary {
-            --loader-width: clamp(140px, 16vw, 240px);
-            --loader-height: clamp(210px, 23vw, 320px);
+            --loader-width: clamp(95px, 11vw, 165px);
+            --loader-height: clamp(145px, 16vw, 225px);
             --shell-color: #f5f3ff;
             --shell-shadow: 0 18px 40px -22px rgba(109, 40, 217, 0.25);
             --face-color: #ddd6fe;
