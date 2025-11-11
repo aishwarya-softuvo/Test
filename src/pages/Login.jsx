@@ -85,9 +85,9 @@ const Login = () => {
 
   return (
     <>
-      <section className="flex min-h-[calc(100vh-8rem)] w-full flex-1 flex-col justify-center px-0 py-16">
-        <div className="flex w-full flex-col overflow-hidden rounded-none bg-white shadow-lg ring-1 ring-black/5 md:flex-row">
-          <div className="flex w-full flex-1 items-center justify-center bg-slate-50/80 p-8 text-center backdrop-blur">
+      <section className="flex min-h-[calc(100vh-8rem)] w-full flex-1 flex-col justify-center bg-slate-100/70 px-0 py-16">
+        <div className="mx-auto flex w-full max-w-6xl flex-col overflow-hidden rounded-3xl bg-white/60 shadow-lg backdrop-blur md:flex-row">
+          <div className="flex w-full flex-1 items-center justify-center bg-white/10 p-8 text-center md:p-12">
             <div className="relative flex items-center justify-center">
               <div
                 ref={loaderRef}
@@ -108,7 +108,7 @@ const Login = () => {
             </div>
           </div>
 
-          <div className="flex w-full flex-1 items-center justify-center p-8">
+          <div className="flex w-full flex-1 items-center justify-center bg-white/40 p-8 md:p-12">
             <div className="w-full max-w-md">
               <h2 className="text-3xl font-semibold tracking-tight text-slate-900">
                 Login
