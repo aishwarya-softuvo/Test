@@ -5,6 +5,7 @@ const Login = () => {
   const [faceOffset, setFaceOffset] = useState({ x: 0, y: 0, rotate: 0 });
   const [eyeOffset, setEyeOffset] = useState({ x: 0, y: 0 });
   const [bodySkew, setBodySkew] = useState(0);
+  const [isPasswordFocused, setIsPasswordFocused] = useState(false);
   const loaderRef = useRef(null);
 
   const handleChange = (event) => {
@@ -16,6 +17,10 @@ const Login = () => {
     const handleMouseMove = (event) => {
       const element = loaderRef.current;
       if (!element) {
+        return;
+      }
+
+      if (isPasswordFocused) {
         return;
       }
 
@@ -51,7 +56,17 @@ const Login = () => {
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
     };
-  }, []);
+  }, [isPasswordFocused]);
+
+  useEffect(() => {
+    if (!isPasswordFocused) {
+      return;
+    }
+
+    setFaceOffset({ x: 0, y: 0, rotate: 0 });
+    setEyeOffset({ x: 0, y: 0 });
+    setBodySkew(0);
+  }, [isPasswordFocused]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -74,6 +89,8 @@ const Login = () => {
                   "--eye-offset-x": `${eyeOffset.x}px`,
                   "--eye-offset-y": `${eyeOffset.y}px`,
                   "--body-skew": `${bodySkew}deg`,
+                  "--eye-visible": isPasswordFocused ? 0 : 1,
+                  "--eye-lid-opacity": isPasswordFocused ? 1 : 0,
                 }}
               />
             </div>
@@ -121,6 +138,8 @@ const Login = () => {
                     type="password"
                     value={formData.password}
                     onChange={handleChange}
+                    onFocus={() => setIsPasswordFocused(true)}
+                    onBlur={() => setIsPasswordFocused(false)}
                     required
                     placeholder="••••••••"
                     className="mt-2 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-2 text-slate-900 shadow-sm outline-none transition focus:border-sky-500 focus:bg-white focus:ring-2 focus:ring-sky-100"
@@ -175,14 +194,28 @@ const Login = () => {
               rotate(var(--face-rotate, 0deg));
             transform-origin: 50% 45%;
             background-image:
-              radial-gradient(circle, #000 48%, transparent 55%),
-              radial-gradient(circle, #000 48%, transparent 55%),
+              radial-gradient(circle, rgba(0, 0, 0, var(--eye-visible, 1)) 48%, transparent 55%),
+              radial-gradient(circle, rgba(0, 0, 0, var(--eye-visible, 1)) 48%, transparent 55%),
               radial-gradient(circle, #fff 30%, transparent 45%),
               radial-gradient(circle, #000 48%, transparent 51%),
               linear-gradient(#000 20px, transparent 0),
               linear-gradient(#cfecf9 60px, transparent 0),
               radial-gradient(circle, #cfecf9 50%, transparent 51%),
-              radial-gradient(circle, #cfecf9 50%, transparent 51%);
+              radial-gradient(circle, #cfecf9 50%, transparent 51%),
+              linear-gradient(
+                to bottom,
+                transparent 46%,
+                rgba(15, 23, 42, var(--eye-lid-opacity, 0)) 46%,
+                rgba(15, 23, 42, var(--eye-lid-opacity, 0)) 54%,
+                transparent 54%
+              ),
+              linear-gradient(
+                to bottom,
+                transparent 46%,
+                rgba(15, 23, 42, var(--eye-lid-opacity, 0)) 46%,
+                rgba(15, 23, 42, var(--eye-lid-opacity, 0)) 54%,
+                transparent 54%
+              );
             background-repeat: no-repeat;
             background-size:
               16px 16px,
@@ -192,7 +225,9 @@ const Login = () => {
               12px 3px,
               50px 25px,
               70px 70px,
-              70px 70px;
+              70px 70px,
+              22px 6px,
+              22px 6px;
             background-position:
               calc(25px + var(--eye-offset-x, 0px)) calc(10px + var(--eye-offset-y, 0px)),
               calc(55px + var(--eye-offset-x, 0px)) calc(10px + var(--eye-offset-y, 0px)),
@@ -201,10 +236,13 @@ const Login = () => {
               50% 85px,
               50% 50px,
               50% 22px,
-              50% 45px;
+              50% 45px,
+              calc(25px + var(--eye-offset-x, 0px)) 18px,
+              calc(55px + var(--eye-offset-x, 0px)) 18px;
             transition:
               transform 0.2s ease-out,
-              background-position 0.15s ease-out;
+              background-position 0.15s ease-out,
+              background-image 0.15s ease-out;
           }
 
           .login-loader:before {
