@@ -180,9 +180,15 @@ const Login = () => {
 
   return (
     <>
-      <section className="flex min-h-screen w-full flex-1 flex-col justify-center bg-gradient-to-br from-slate-50 via-blue-50/30 to-purple-50/20 px-0 py-0">
-        <div className="flex w-full h-screen flex-col overflow-hidden md:flex-row">
-          <div className="flex w-full flex-1 items-center justify-center bg-gradient-to-br from-white/80 to-slate-50/60 p-8 md:p-16 overflow-visible">
+      <section className="flex min-h-[calc(100vh-8rem)] w-full flex-1 flex-col justify-center bg-slate-100/70 px-0 py-16">
+        <div
+          className="mx-auto flex w-full flex-col overflow-hidden rounded-3xl bg-white/60 shadow-lg backdrop-blur md:flex-row"
+          style={{ maxWidth: "90rem" }}
+        >
+          <div
+            className="flex w-full flex-1 items-center justify-center bg-white/10 p-8 text-center md:p-12 overflow-visible"
+            style={{ minWidth: "0" }}
+          >
             <div className="login-loader-stack">
               {SHAPE_CONFIGS.map((config, index) => {
                 const offsets = shapeOffsets[index];
@@ -224,19 +230,19 @@ const Login = () => {
             </div>
           </div>
 
-          <div className="flex w-full flex-1 items-center justify-center bg-white/90 backdrop-blur-sm p-8 md:p-16 lg:p-20">
-            <div className="w-full max-w-lg">
-              <h2 className="text-4xl font-bold tracking-tight text-slate-900 mb-2">
+          <div className="flex w-full flex-1 items-center justify-center bg-white/40 p-8 md:p-12">
+            <div className="w-full max-w-md">
+              <h2 className="text-3xl font-semibold tracking-tight text-slate-900">
                 Login
               </h2>
-              <p className="mt-2 text-base text-slate-600 mb-8">
+              <p className="mt-4 text-sm text-slate-600">
                 Enter your credentials to access your account.
               </p>
 
-              <form className="space-y-6" onSubmit={handleSubmit}>
+              <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
                 <div>
                   <label
-                    className="block text-sm font-semibold text-slate-700 mb-2"
+                    className="block text-sm font-medium text-slate-700"
                     htmlFor="email"
                   >
                     Email
@@ -249,13 +255,13 @@ const Login = () => {
                     onChange={handleChange}
                     required
                     placeholder="you@example.com"
-                    className="w-full rounded-lg border-2 border-slate-200 bg-white px-4 py-3 text-slate-900 shadow-sm outline-none transition-all duration-200 focus:border-sky-500 focus:bg-white focus:ring-4 focus:ring-sky-100"
+                    className="mt-2 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-2 text-slate-900 shadow-sm outline-none transition focus:border-sky-500 focus:bg-white focus:ring-2 focus:ring-sky-100"
                   />
                 </div>
 
                 <div>
                   <label
-                    className="block text-sm font-semibold text-slate-700 mb-2"
+                    className="block text-sm font-medium text-slate-700"
                     htmlFor="password"
                   >
                     Password
@@ -292,13 +298,13 @@ const Login = () => {
                     onMouseLeave={handlePointerLeave}
                     required
                     placeholder="••••••••"
-                    className="w-full rounded-lg border-2 border-slate-200 bg-white px-4 py-3 text-slate-900 shadow-sm outline-none transition-all duration-200 focus:border-sky-500 focus:bg-white focus:ring-4 focus:ring-sky-100"
+                    className="mt-2 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-2 text-slate-900 shadow-sm outline-none transition focus:border-sky-500 focus:bg-white focus:ring-2 focus:ring-sky-100"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full rounded-lg bg-gradient-to-r from-sky-600 to-blue-600 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-sky-500/30 transition-all duration-200 hover:from-sky-500 hover:to-blue-500 hover:shadow-xl hover:shadow-sky-500/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500 active:scale-[0.98]"
+                  className="w-full rounded-xl bg-sky-600 px-4 py-2 text-base font-semibold text-white shadow-sm transition hover:bg-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500"
                 >
                   Sign In
                 </button>
@@ -306,7 +312,7 @@ const Login = () => {
                 <p className="text-center text-sm text-slate-600">
                   Don&apos;t have an account yet?{" "}
                   <a
-                    className="font-semibold text-sky-600 hover:text-sky-500 transition-colors duration-200"
+                    className="font-medium text-sky-600 hover:text-sky-500"
                     href="#"
                   >
                     Create Account
@@ -374,8 +380,8 @@ const Login = () => {
           }
 
           .login-loader {
-            --loader-width: clamp(100px, 9.5vw, 135px);
-            --loader-height: clamp(150px, 16vw, 230px);
+            --loader-width: clamp(85px, 8vw, 115px);
+            --loader-height: clamp(130px, 14vw, 200px);
             --shell-color: #fff;
             --shell-shadow: none;
             --face-color: #cfecf9;
@@ -400,8 +406,8 @@ const Login = () => {
           .login-loader:after {
             content: "";
             position: absolute;
-            width: 80px;
-            height: 100px;
+            width: 70px;
+            height: 88px;
             left: 50%;
             top: 25px;
             transform: translate(calc(-50% + var(--face-offset-x, 0px)), var(--face-offset-y, 0px))
@@ -432,27 +438,27 @@ const Login = () => {
               );
             background-repeat: no-repeat;
             background-size:
-              14px 14px,
-              14px 14px,
-              9px 9px,
-              34px 34px,
-              10px 2px,
-              40px 20px,
-              57px 57px,
-              57px 57px,
-              16px 3px,
-              16px 3px;
+              12px 12px,
+              12px 12px,
+              8px 8px,
+              30px 30px,
+              9px 2px,
+              35px 18px,
+              50px 50px,
+              50px 50px,
+              14px 3px,
+              14px 3px;
             background-position:
-              calc(20px + var(--eye-offset-x, 0px)) calc(8px + var(--eye-offset-y, 0px)),
-              calc(44px + var(--eye-offset-x, 0px)) calc(8px + var(--eye-offset-y, 0px)),
-              28px 35px,
-              50% 24px,
-              50% 68px,
-              50% 40px,
-              50% 18px,
-              50% 36px,
-              calc(19px + var(--eye-offset-x, 0px)) calc(9px + var(--eye-offset-y, 0px)),
-              calc(43px + var(--eye-offset-x, 0px)) calc(9px + var(--eye-offset-y, 0px));
+              calc(18px + var(--eye-offset-x, 0px)) calc(7px + var(--eye-offset-y, 0px)),
+              calc(39px + var(--eye-offset-x, 0px)) calc(7px + var(--eye-offset-y, 0px)),
+              25px 31px,
+              50% 21px,
+              50% 60px,
+              50% 35px,
+              50% 16px,
+              50% 32px,
+              calc(17px + var(--eye-offset-x, 0px)) calc(8px + var(--eye-offset-y, 0px)),
+              calc(38px + var(--eye-offset-x, 0px)) calc(8px + var(--eye-offset-y, 0px));
             transition:
               transform 0.2s ease-out,
               background-position 0.15s ease-out,
@@ -463,7 +469,7 @@ const Login = () => {
             content: "";
             position: absolute;
             width: 140%;
-            height: 100px;
+            height: 88px;
             left: -20%;
             top: 0;
             transform: translate(calc(var(--face-offset-x, 0px) * 0.4), calc(var(--face-offset-y, 0px) * 0.4))
@@ -473,14 +479,14 @@ const Login = () => {
               radial-gradient(circle, var(--ear-color) 48%, transparent 50%),
               radial-gradient(circle, var(--ear-color) 48%, transparent 50%);
             background-repeat: no-repeat;
-            background-size: 52px 52px;
-            background-position: 0px 9px, 116px 9px;
+            background-size: 46px 46px;
+            background-position: 0px 8px, 102px 8px;
             transition: transform 0.2s ease-out;
           }
 
           .login-loader--primary {
-            --loader-width: clamp(100px, 9.5vw, 135px);
-            --loader-height: clamp(180px, 20vw, 270px);
+            --loader-width: clamp(85px, 8vw, 115px);
+            --loader-height: clamp(160px, 18vw, 240px);
             --shell-color: #fff;
             --shell-shadow: 0 20px 45px -20px rgba(15, 23, 42, 0.35);
             --face-color: #cfecf9;
@@ -493,8 +499,8 @@ const Login = () => {
           }
 
           .login-loader--secondary {
-            --loader-width: clamp(90px, 10.5vw, 155px);
-            --loader-height: clamp(95px, 10.5vw, 140px);
+            --loader-width: clamp(75px, 9vw, 135px);
+            --loader-height: clamp(80px, 9vw, 120px);
             --shell-color: #fff7ed;
             --shell-shadow: 0 18px 40px -22px rgba(217, 119, 6, 0.25);
             --face-color: #fed7aa;
@@ -507,8 +513,8 @@ const Login = () => {
           }
 
           .login-loader--tertiary {
-            --loader-width: clamp(105px, 11.5vw, 165px);
-            --loader-height: clamp(130px, 13.5vw, 185px);
+            --loader-width: clamp(90px, 10vw, 145px);
+            --loader-height: clamp(110px, 12vw, 160px);
             --shell-color: #eff6ff;
             --shell-shadow: 0 18px 40px -22px rgba(37, 99, 235, 0.28);
             --face-color: #bfdbfe;
@@ -521,8 +527,8 @@ const Login = () => {
           }
 
           .login-loader--quaternary {
-            --loader-width: clamp(85px, 10vw, 145px);
-            --loader-height: clamp(165px, 17vw, 235px);
+            --loader-width: clamp(70px, 8vw, 125px);
+            --loader-height: clamp(140px, 15vw, 200px);
             --shell-color: #f5f3ff;
             --shell-shadow: 0 18px 40px -22px rgba(109, 40, 217, 0.25);
             --face-color: #ddd6fe;
