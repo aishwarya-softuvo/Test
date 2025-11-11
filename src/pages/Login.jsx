@@ -4,38 +4,70 @@ const SHAPE_CONFIGS = [
   {
     id: "primary",
     className: "login-loader login-loader--primary",
-    wrapperClass: "sm:col-span-1",
+    wrapperClass: "w-full sm:w-auto flex-shrink-0",
     faceMax: 18,
     eyeMax: 5,
     rotationMax: 8,
     bodySkewMax: 6,
+    layout: {
+      translateX: -110,
+      translateY: 28,
+      scale: 0.92,
+      zIndex: 2,
+      opacity: 1,
+      filter: "none",
+    },
   },
   {
     id: "secondary",
     className: "login-loader login-loader--secondary",
-    wrapperClass: "sm:col-span-1",
+    wrapperClass: "w-full sm:w-auto flex-shrink-0",
     faceMax: 16,
     eyeMax: 4.5,
     rotationMax: 7,
     bodySkewMax: 5,
+    layout: {
+      translateX: -50,
+      translateY: 22,
+      scale: 0.93,
+      zIndex: 1,
+      opacity: 1,
+      filter: "none",
+    },
   },
   {
     id: "tertiary",
     className: "login-loader login-loader--tertiary",
-    wrapperClass: "sm:col-span-1",
+    wrapperClass: "w-full sm:w-auto flex-shrink-0",
     faceMax: 17,
     eyeMax: 5,
     rotationMax: 8,
     bodySkewMax: 6,
+    layout: {
+      translateX: -8,
+      translateY: -2,
+      scale: 1.04,
+      zIndex: 4,
+      opacity: 1,
+      filter: "none",
+    },
   },
   {
     id: "quaternary",
     className: "login-loader login-loader--quaternary",
-    wrapperClass: "sm:col-span-2",
+    wrapperClass: "w-full sm:w-auto flex-shrink-0",
     faceMax: 15,
     eyeMax: 4,
     rotationMax: 6,
     bodySkewMax: 4,
+    layout: {
+      translateX: 25,
+      translateY: 2,
+      scale: 0.96,
+      zIndex: 3,
+      opacity: 1,
+      filter: "none",
+    },
   },
 ];
 
@@ -149,15 +181,27 @@ const Login = () => {
   return (
     <>
       <section className="flex min-h-[calc(100vh-8rem)] w-full flex-1 flex-col justify-center bg-slate-100/70 px-0 py-16">
-        <div className="mx-auto flex w-full max-w-6xl flex-col overflow-hidden rounded-3xl bg-white/60 shadow-lg backdrop-blur md:flex-row">
-          <div className="flex w-full flex-1 items-center justify-center bg-white/10 p-8 text-center md:p-12">
-            <div className="grid w-full max-w-xl items-end gap-8 sm:grid-cols-2">
+        <div className="mx-auto flex w-full max-w-7xl flex-col overflow-hidden rounded-3xl bg-white/60 shadow-lg backdrop-blur md:flex-row">
+          <div
+            className="flex w-full flex-1 items-center justify-center bg-white/10 p-8 text-center md:p-12 overflow-visible"
+            style={{ minWidth: "0" }}
+          >
+            <div className="login-loader-stack">
               {SHAPE_CONFIGS.map((config, index) => {
                 const offsets = shapeOffsets[index];
+                const layout = config.layout ?? {};
                 return (
                   <div
                     key={config.id}
-                    className={`relative flex items-end justify-center ${config.wrapperClass}`}
+                    className={`login-loader-stack__item ${config.wrapperClass}`}
+                    style={{
+                      "--layout-translate-x": `${layout.translateX ?? 0}px`,
+                      "--layout-translate-y": `${layout.translateY ?? 0}px`,
+                      "--layout-scale": layout.scale ?? 1,
+                      "--layout-opacity": layout.opacity ?? 1,
+                      "--layout-filter": layout.filter ?? "none",
+                      "--layout-z": layout.zIndex ?? 1,
+                    }}
                   >
                     <div
                       ref={(element) => {
@@ -279,11 +323,59 @@ const Login = () => {
 
       <style>
         {`
+          .login-loader-stack {
+            position: relative;
+            display: flex;
+            width: 100%;
+            max-width: clamp(600px, 70vw, 900px);
+            align-items: flex-end;
+            justify-content: flex-start;
+            padding: clamp(20px, 3.5vw, 34px);
+            gap: 0;
+            border-radius: clamp(120px, 20vw, 260px);
+            background: transparent;
+            box-shadow: none;
+            margin-left: clamp(0px, 2vw, 40px);
+          }
+
+          .login-loader-stack__item {
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            transform: translate(
+                var(--layout-translate-x, 0px),
+                var(--layout-translate-y, 0px)
+              )
+              scale(var(--layout-scale, 1));
+            opacity: var(--layout-opacity, 1);
+            filter: var(--layout-filter, none);
+            transition:
+              transform 0.4s ease,
+              filter 0.35s ease,
+              opacity 0.35s ease;
+            z-index: var(--layout-z, 1);
+          }
+
+          @media (max-width: 768px) {
+            .login-loader-stack {
+              flex-wrap: wrap;
+              justify-content: center;
+              gap: clamp(32px, 8vw, 56px);
+            }
+
+            .login-loader-stack__item {
+              transform: translate(0, 0) scale(0.92);
+              opacity: 1;
+              filter: none;
+            }
+          }
+
           .login-loader {
             --loader-width: clamp(160px, 15vw, 220px);
             --loader-height: clamp(185px, 20vw, 280px);
             --shell-color: #fff;
-            --shell-shadow: 0 20px 45px -20px rgba(15, 23, 42, 0.35);
+            --shell-shadow: none;
             --face-color: #cfecf9;
             --nose-color: #000;
             --mouth-color: #000;
