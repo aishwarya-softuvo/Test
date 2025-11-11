@@ -5,7 +5,9 @@ const Login = () => {
   const [faceOffset, setFaceOffset] = useState({ x: 0, y: 0, rotate: 0 });
   const [eyeOffset, setEyeOffset] = useState({ x: 0, y: 0 });
   const [bodySkew, setBodySkew] = useState(0);
-  const [isPasswordFocused, setIsPasswordFocused] = useState(false);
+  const [isPasswordPointerInside, setIsPasswordPointerInside] = useState(false);
+  const [isPasswordTyping, setIsPasswordTyping] = useState(false);
+  const typingTimeoutRef = useRef(null);
   const loaderRef = useRef(null);
 
   const handleChange = (event) => {
@@ -20,7 +22,7 @@ const Login = () => {
         return;
       }
 
-      if (isPasswordFocused) {
+      if (isPasswordPointerInside || isPasswordTyping) {
         return;
       }
 
@@ -56,17 +58,25 @@ const Login = () => {
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
     };
-  }, [isPasswordFocused]);
+  }, [isPasswordPointerInside, isPasswordTyping]);
 
   useEffect(() => {
-    if (!isPasswordFocused) {
+    return () => {
+      if (typingTimeoutRef.current) {
+        clearTimeout(typingTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!isPasswordPointerInside && !isPasswordTyping) {
       return;
     }
 
     setFaceOffset({ x: 0, y: 0, rotate: 0 });
     setEyeOffset({ x: 0, y: 0 });
     setBodySkew(0);
-  }, [isPasswordFocused]);
+  }, [isPasswordPointerInside, isPasswordTyping]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -75,9 +85,9 @@ const Login = () => {
 
   return (
     <>
-      <section className="mx-auto flex w-full max-w-5xl flex-1 flex-col items-center px-4 py-16">
-        <div className="flex w-full flex-col overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-black/5 md:flex-row">
-          <div className="flex w-full flex-1 items-center justify-center bg-slate-50/80 p-10 text-center backdrop-blur">
+      <section className="flex min-h-[calc(100vh-8rem)] w-full flex-1 flex-col justify-center px-0 py-16">
+        <div className="flex w-full flex-col overflow-hidden rounded-none bg-white shadow-lg ring-1 ring-black/5 md:flex-row">
+          <div className="flex w-full flex-1 items-center justify-center bg-slate-50/80 p-8 text-center backdrop-blur">
             <div className="relative flex items-center justify-center">
               <div
                 ref={loaderRef}
@@ -89,14 +99,16 @@ const Login = () => {
                   "--eye-offset-x": `${eyeOffset.x}px`,
                   "--eye-offset-y": `${eyeOffset.y}px`,
                   "--body-skew": `${bodySkew}deg`,
-                  "--eye-visible": isPasswordFocused ? 0 : 1,
-                  "--eye-lid-opacity": isPasswordFocused ? 1 : 0,
+                  "--eye-visible":
+                    isPasswordPointerInside || isPasswordTyping ? 0 : 1,
+                  "--eye-lid-opacity":
+                    isPasswordPointerInside || isPasswordTyping ? 1 : 0,
                 }}
               />
             </div>
           </div>
 
-          <div className="flex w-full flex-1 items-center justify-center p-10">
+          <div className="flex w-full flex-1 items-center justify-center p-8">
             <div className="w-full max-w-md">
               <h2 className="text-3xl font-semibold tracking-tight text-slate-900">
                 Login
@@ -138,8 +150,42 @@ const Login = () => {
                     type="password"
                     value={formData.password}
                     onChange={handleChange}
-                    onFocus={() => setIsPasswordFocused(true)}
-                    onBlur={() => setIsPasswordFocused(false)}
+                    onKeyDown={() => {
+                      if (typingTimeoutRef.current) {
+                        clearTimeout(typingTimeoutRef.current);
+                      }
+                      setIsPasswordTyping(true);
+                    }}
+                    onKeyUp={() => {
+                      if (typingTimeoutRef.current) {
+                        clearTimeout(typingTimeoutRef.current);
+                      }
+                      typingTimeoutRef.current = setTimeout(() => {
+                        setIsPasswordTyping(false);
+                      }, 1000);
+                    }}
+                    onInput={() => {
+                      if (typingTimeoutRef.current) {
+                        clearTimeout(typingTimeoutRef.current);
+                      }
+                      setIsPasswordTyping(true);
+                    }}
+                    onFocus={() => setIsPasswordPointerInside(true)}
+                    onBlur={() => {
+                      if (typingTimeoutRef.current) {
+                        clearTimeout(typingTimeoutRef.current);
+                      }
+                      setIsPasswordPointerInside(false);
+                      setIsPasswordTyping(false);
+                    }}
+                    onMouseEnter={() => setIsPasswordPointerInside(true)}
+                    onMouseLeave={() => {
+                      if (typingTimeoutRef.current) {
+                        clearTimeout(typingTimeoutRef.current);
+                      }
+                      setIsPasswordPointerInside(false);
+                      setIsPasswordTyping(false);
+                    }}
                     required
                     placeholder="••••••••"
                     className="mt-2 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-2 text-slate-900 shadow-sm outline-none transition focus:border-sky-500 focus:bg-white focus:ring-2 focus:ring-sky-100"
@@ -171,8 +217,8 @@ const Login = () => {
       <style>
         {`
           .login-loader {
-            width: 160px;
-            height: 185px;
+            width: clamp(160px, 15vw, 220px);
+            height: clamp(185px, 20vw, 280px);
             position: relative;
             background: #fff;
             border-radius: 100px 100px 0 0;
